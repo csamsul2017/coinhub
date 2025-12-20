@@ -10,6 +10,7 @@ export default {
       colors: {
         primary: '#0052FF',
         surface: '#EEF0F3',
+        state: '#F9FAFB',
       },
     },
   },
