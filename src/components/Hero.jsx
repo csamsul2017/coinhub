@@ -2,12 +2,9 @@ import { heroImage } from '../assets/home';
 
 const Hero = () => {
   return (
-    <div className="pt-24 border border-red-200 px-4 flex flex-col gap-4 lg:flex-row lg:gap-12">
-      <div className="flex flex-col gap 4 lg:order-2 lg:flex-1 lg:justify-center lg:gap-6">
-        <h1 className="text-6xl md:text-7xl">
-          <span>The future of</span>
-          <span> finance is here</span>
-        </h1>
+    <div className="pt-24 px-4 flex flex-col gap-4 pb-10 lg:flex-row lg:gap-12 lg:px-8">
+      <div className="flex flex-col gap-4 lg:order-2 lg:flex-1 lg:justify-center lg:gap-6">
+        <h1 className="text-6xl md:text-7xl lg:max-w-lg">The future of finance is here</h1>
 
         <p className="text-lg">Trade crypto and more on a platform you can trust</p>
 
@@ -20,7 +17,7 @@ const Hero = () => {
       </div>
 
       <div className="flex flex-col gap-2 lg:flex-1">
-        <div className="rounded-3xl overflow-hidden">
+        <div className="rounded-[3rem] overflow-hidden">
           <img src={heroImage} alt="Hero Image" className="object-cover" />
         </div>
 

@@ -14,7 +14,7 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
 
   return (
     <div className="flex flex-col relative">
-      <div className="flex gap-4 h-16 px-4 justify-between fixed w-full z-[90] shadow-sm bg-white">
+      <div className="flex gap-4 h-16 px-4 justify-between fixed w-full z-[90] shadow-sm bg-white lg:px-8">
         <div className="flex">
           <img src={coinbaseLogo} className="w-8 shrink-0" alt="Coinbase Logo" />
         </div>

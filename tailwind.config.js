@@ -13,6 +13,10 @@ export default {
         state: '#F9FAFB',
         muted: '#6B7280',
       },
+      borderRadius: {
+        '4xl': '2.5rem',
+        '5xl': '3rem',
+      },
     },
   },
   plugins: [],
