@@ -92,17 +92,17 @@ const TrableCoins = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {coin.map((coinX, i) => (
         <div className="text-white flex gap-4" key={i}>
           <div className="w-8">
-            <img src={coinX.img} alt={coinX.name} />
+            <img src={coinX.img} className="w-8 shrink-0" alt={coinX.name} />
           </div>
           <h3 className="flex-1 text-2xl">{coinX.name}</h3>
-          <div className="flex-[2] flex flex-col items-end ">
+          <div className="flex-[2] flex flex-col items-end">
             <div>
-              <span className="mr-2 font-bold tracking-[0.1em]">IDR</span>
-              <SlotCounter charClassName="tracking-[0.1em] text-xl font-mono" autoAnimationStart={false} value={coinX.idr.toLocaleString()} />
+              <span className="mr-2 font-bold tracking-[0.1em] md:text-2xl">IDR</span>
+              <SlotCounter charClassName="tracking-[0.1em] text-xl font-mono leading-none md:text-3xl" autoAnimationStart={false} value={coinX.idr.toLocaleString()} />
             </div>
 
             <div className={`flex p-0 m-0 items-center ${coinX.isUp ? `text-[#27AD75]` : `text-[#F0616D]`}`}>

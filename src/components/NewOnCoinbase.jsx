@@ -1,53 +1,52 @@
-import React from 'react';
-import { mCoin, nightCoin, perpCoin, syrupCoin, thqCoin, zkpCoin } from '../assets/home/index';
+import { useState, useEffect } from 'react';
+import { bnbCoin, coin2z, asterCoin, jupiterCoin, tonCoin, xplCoin } from '../assets/home/index';
 import { GoArrowUpRight, GoArrowDownLeft } from 'react-icons/go';
 import SlotCounter from 'react-slot-counter';
-import { useState, useEffect } from 'react';
 
 const coins = [
   {
-    img: mCoin,
-    name: 'M',
+    img: bnbCoin,
+    name: 'BNB',
     idr: 12345678,
     openPrice: 12345678,
     gain: 0,
     isUp: true,
   },
   {
-    img: nightCoin,
-    name: 'NIGHT',
+    img: coin2z,
+    name: '2Z',
     idr: 34543,
     openPrice: 34543,
     gain: 0,
     isUp: true,
   },
   {
-    img: perpCoin,
-    name: 'PERP',
+    img: asterCoin,
+    name: 'ASTER',
     idr: 435435,
     openPrice: 435435,
     gain: 0,
     isUp: true,
   },
   {
-    img: syrupCoin,
-    name: 'SYRUP',
-    idr: 345454646464,
-    openPrice: 34545464646,
+    img: jupiterCoin,
+    name: 'JUPITER',
+    idr: 34545464,
+    openPrice: 3454546,
     gain: 0,
     isUp: true,
   },
   {
-    img: thqCoin,
-    name: 'THQ',
+    img: tonCoin,
+    name: 'TON',
     idr: 12345678,
     openPrice: 12345678,
     gain: 0,
     isUp: true,
   },
   {
-    img: zkpCoin,
-    name: 'ZKP',
+    img: xplCoin,
+    name: 'XPL',
     idr: 444445555,
     openPrice: 444445555,
     gain: 0,
@@ -55,7 +54,7 @@ const coins = [
   },
 ];
 
-const TopGainers = () => {
+const NewOnCoinbase = () => {
   const [coin, setCoin] = useState(coins);
   useEffect(() => {
     const timer = setInterval(() => {
@@ -117,4 +116,4 @@ const TopGainers = () => {
   );
 };
 
-export default TopGainers;
+export default NewOnCoinbase;

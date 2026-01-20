@@ -7,21 +7,29 @@ import 'odometer/themes/odometer-theme-default.css';
 import SlotCounter from 'react-slot-counter';
 import TrableCoins from './TrableCoins';
 import TopGainers from './TopGainers';
+import NewOnCoinbase from './NewOnCoinbase';
 
-const categories = ['Tradable', 'Top gainers', 'New on Coinbase'];
+const categories = ['Tradable', 'Top gainers', 'New on Coinhub'];
+const catagoryContent = {
+  Tradable: <TrableCoins />,
+  'Top gainers': <TopGainers />,
+  'New on Coinhub': <NewOnCoinbase />,
+};
 
 const ExploreTokens = () => {
   const [activeCategory, setActiveCategory] = useState('Tradable');
   return (
-    <div className="px-4 py-8 bg-surface flex flex-col gap-4">
-      <h2 className="text-4xl max-w-96">Explore millions of tokens, all in one place.</h2>
-      <p className="text-muted">One trusted account for trading everything</p>
-      <button className="w-fit bg-[#0A0B0D] rounded-full py-4 text-white font-bold px-8">See more assets</button>
+    <div className="px-4 py-8 bg-surface flex flex-col gap-4 lg:flex-row lg:justify-between lg:px-8 lg:py-24 lg:gap-70">
+      <div className="flex flex-col gap-4 lg:justify-center lg:flex-1">
+        <h2 className="text-4xl max-w-96 md:max-w-none lg:text-5xl lg:w-[500px]">Explore millions of tokens, all in one place.</h2>
+        <p className="text-muted">One trusted account for trading everything</p>
+        <button className="w-fit bg-[#0A0B0D] rounded-full py-4 text-white font-bold px-8">See more assets</button>
+      </div>
 
-      <div className="bg-[#0A0B0D] text-white rounded-3xl px-8 py-8 flex flex-col gap-8">
+      <div className="bg-[#0A0B0D] text-white rounded-3xl px-8 py-8 flex flex-col gap-8 lg:flex-1">
         <div className="flex gap-8 font-bold overflow-hidden">
           {categories.map((category, i) => (
-            <button key={i} onClick={() => setActiveCategory(category)} className={`${activeCategory === category ? 'bg-gray-100/10' : ''} px-4 py-2 rounded-full whitespace-nowrap `}>
+            <button key={i} onClick={() => setActiveCategory(category)} className={`${activeCategory === category ? 'bg-gray-100/10' : ''} px-4 py-2 rounded-full whitespace-nowrap active:scale-95 transition`}>
               {category}
             </button>
           ))}
@@ -55,7 +63,9 @@ const ExploreTokens = () => {
             </div>
           </div>
         ))} */}
-        <TrableCoins />
+        {/* <TrableCoins /> */}
+        {/* <TopGainers /> */}
+        {catagoryContent[activeCategory]}
       </div>
     </div>
   );

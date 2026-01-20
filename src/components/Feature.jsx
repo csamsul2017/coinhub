@@ -11,8 +11,8 @@ const Feature = () => {
         </div>
 
         <div className="flex flex-col gap-6 md:flex-1">
-          <h2 className="text-4xl md:max-w-1/2 md:text-5xl lg:w-full lg:text-6xl">The future of finance is on Coinbase.</h2>
-          <p className="text-md md:text-lg">Watch the System Update replay to see Brian Armstrong and the Coinbase team introduce the next chapter for the company.</p>
+          <h2 className="text-4xl md:max-w-1/2 md:text-5xl lg:w-full lg:text-6xl">The future of finance is on Coinhub.</h2>
+          <p className="text-md md:text-lg">Watch the System Update replay to see Brian Armstrong and the Coinhub team introduce the next chapter for the company.</p>
 
           <button className="w-fit px-8 py-4 rounded-full bg-white text-black font-bold">Watch now</button>
         </div>
