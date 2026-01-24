@@ -1,18 +1,37 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaApple } from 'react-icons/fa';
 
-const SignInCard = () => {
+const SignInCard = ({ setEmail, onNext }) => {
+  const [validEmail, setValidEmail] = useState(false);
+
   return (
     <div className="flex justify-center flex-1 md:items-end">
       <div className="flex flex-col gap-4 px-10 py-4 text-white h-fit md:border md:border-muted/50 md:rounded-3xl md:max-w-md md:py-8">
         <h1 className="text-2xl font-bold">Sign in to Coinhub</h1>
 
-        <div className="flex flex-col gap-4">
-          <p>Email</p>
-          <input type="email" className="p-4 bg-transparent border border-muted/50 rounded-xl" placeholder="Your email address" />
-          <Link className="py-4 font-bold text-center text-black rounded-full bg-blue-500/60">Continue</Link>
-        </div>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            onNext();
+          }}
+          className="flex flex-col gap-4"
+        >
+          <label>Email</label>
+          <input
+            type="email"
+            className="p-4 bg-transparent border border-muted/50 rounded-xl"
+            onChange={e => {
+              setEmail(e.target.value);
+              setValidEmail(e.target.validity.valid);
+            }}
+            placeholder="Your email address"
+            required
+          />
+          <button type="submit" className={`py-4 font-bold text-center text-black rounded-full ${validEmail ? 'bg-primary' : 'bg-blue-500/60'}`} disabled={!validEmail}>
+            Continue
+          </button>
+        </form>
 
         <div className="flex gap-4 my-4 text-muted">
           <div className="flex-1 mt-3 border-t border-muted"></div>

@@ -1,31 +1,43 @@
 import React, { useState } from 'react';
 import { FaUserCircle, FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 
-const SignInPassCard = () => {
+const SignInPassCard = ({ email, password, setPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const validPassword = password.length > 1;
+
   return (
-    <div className="flex-1 flex justify-center md:items-center">
-      <div className="flex flex-col gap-4 text-white p-6 max-w-md h-fit md:border md:border-muted/30 md:rounded-2xl">
+    <div className="flex justify-center flex-1 md:items-center">
+      <div className="flex flex-col max-w-md gap-4 p-6 text-white h-fit md:border md:border-muted/30 md:rounded-2xl">
         <h1 className="text-2xl font-bold">Sign in to Coinhub</h1>
-        <div className="flex items-center font-bold gap-2 border p-4 rounded-lg border-muted/30">
+        <div className="flex items-center gap-2 p-4 font-bold border rounded-lg border-muted/30">
           <FaUserCircle size={32} />
-          samsul@samsuldev.my.id
+          {email}
         </div>
 
         <div className="relative">
-          <p>Password</p>
-          <input type={showPassword ? 'text' : 'password'} className="w-full bg-transparent border p-4 rounded-lg border-muted" />
-          <button className="absolute right-2 top-9 text-muted p-2" onClick={() => setShowPassword(!showPassword)}>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              alert('You are login');
+            }}
+            className="flex flex-col gap-2"
+          >
+            <p>Password</p>
+            <input type={showPassword ? 'text' : 'password'} onChange={e => setPassword(e.target.value)} className="w-full p-4 bg-transparent border rounded-lg border-muted" required />
+
+            <p className="text-blue-500">Forgot password?</p>
+            <button type="submit" className={`w-full p-4 font-bold text-black rounded-full  ${validPassword ? 'bg-primary' : 'bg-blue-500/50'} `} disabled={!password}>
+              Continue
+            </button>
+          </form>
+
+          <button className="absolute p-2 right-2 top-11 text-muted" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
           </button>
         </div>
 
-        <p className="text-blue-500">Forgot password?</p>
-
-        <button className="text-black w-full p-4 bg-blue-500/50 font-bold rounded-full">Continue</button>
-
-        <p className="text-muted leading-none mt-16">We use strictly necessary cookies to enable essential functions, such as security and authentication. For more information, see our </p>
+        <p className="mt-16 leading-none text-muted">We use strictly necessary cookies to enable essential functions, such as security and authentication. For more information, see our </p>
       </div>
     </div>
   );
