@@ -10,13 +10,14 @@ import ForgetPassCard from '../components/signup/ForgetPassCard';
 const SignUp = () => {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className="bg-[#0A0B0D] py-4 min-h-screen">
       <HeaderSignUp />
       {step === 1 && <RegistrationCard onNext={() => setStep(2)} setEmail={setEmail} />}
       {step === 2 && <VerifyEmailCard email={email} onBack={() => setStep(1)} onNext={() => setStep(3)} />}
-      {step === 3 && <CreatePasswordCard />}
+      {step === 3 && <CreatePasswordCard password={password} setPassword={setPassword} />}
       {/* <VerifyPhoneNumberCard /> */}
 
       {/* <UserIdentityCard /> */}
