@@ -10,9 +10,11 @@ const CreatePasswordCard = ({ password, setPassword }) => {
   const isValidPassword = hasLength && hasMixedCase && hasNumber && hasSymbol;
 
   const ValidationItem = ({ isValid, text }) => {
+    const isRuleValid = isValid && 'text-green-500';
+
     return (
-      <li className={`flex items-center gap-2 ${isValid ? 'text-white' : 'text-muted'}`}>
-        <FaCheckCircle className={isValid ? 'text-green-500' : ''} /> {text}
+      <li className={`flex items-center gap-2 text-muted`}>
+        <FaCheckCircle className={isRuleValid} /> {text}
       </li>
     );
   };

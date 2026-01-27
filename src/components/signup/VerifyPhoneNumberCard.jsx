@@ -1,29 +1,53 @@
-import React from 'react';
+import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 
-const VerifyPhoneNumberCard = () => {
-  return (
-    <div className="text-white flex justify-center mt-16">
-      <div className="flex flex-col px-4 gap-4 md:border md:border-muted/50 md:p-8 md:max-w-md rounded-2xl">
-        <h1 className="font-bold text-2xl">Verify your phone number</h1>
-        <p className="text-muted leading-none">Enter your phone number to receive a verification code</p>
+const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber }) => {
+  const safePhoneNumber = phoneNumber || '';
+  const hasLength = safePhoneNumber.length >= 10 && safePhoneNumber.length <= 13;
 
-        <div>
-          <p>Phone number</p>
-          <div className="flex gap-4 justify-between">
-            <div className="flex flex-1 gap-4 items-center border border-muted/50 px-4 py-4 rounded-lg">
-              ID +62
-              <FaChevronDown />
-            </div>
-            <div>
-              <input type="text" inputMode="numeric" pattern="[0-9]" className="flex-1 h-full rounded-lg bg-transparent border border-muted/50 px-4" placeholder="0000-000-000" />
+  return (
+    <div className="flex justify-center mt-16 text-white">
+      <div className="flex flex-col gap-8 px-4 md:border md:border-muted/50 md:p-8 md:max-w-md rounded-2xl">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold">Verify your phone number</h1>
+          <p className="leading-none text-muted">Enter your phone number to receive a verification code</p>
+        </div>
+
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            alert('Succes');
+          }}
+          className="flex flex-col justify-between gap-2"
+        >
+          <label>Phone number</label>
+          <div className="flex gap-4">
+            <div className="flex items-center gap-4 px-12 py-4 border rounded-lg w-fit border-muted/50">ID +62</div>
+            <div className="flex-1">
+              <input
+                type="text"
+                onChange={e => {
+                  const val = e.target.value;
+
+                  if (val === '' || /^[0-9]+$/.test(val)) {
+                    setPhoneNumber(val);
+                  }
+                }}
+                inputMode="numeric"
+                className="w-full h-full px-4 bg-transparent border rounded-lg border-muted/50"
+                placeholder="0000-000-000"
+                value={phoneNumber}
+                required
+              />
             </div>
           </div>
 
-          <button className="bg-blue-500/50 text-black font-bold w-full mt-4 py-4 rounded-full">Continue</button>
-        </div>
+          <button type="submit" className="w-full py-4 mt-4 font-bold text-black rounded-full bg-primary disabled:bg-blue-500/50 active:scale-95 hover:bg-primary/90" disabled={!hasLength}>
+            Continue
+          </button>
+        </form>
 
-        <p className="text-muted leading-none text-xs">
+        <p className="text-xs leading-none text-muted">
           Messaging and data rates may apply. Message frequency depends on account activity. Reply HELP for support or STOP to opt out of future alerts. Opting out won't affect two-step verification SMS. Click for{' '}
           <span>User Agreements</span> and <span>Privacy Policy</span>
         </p>
