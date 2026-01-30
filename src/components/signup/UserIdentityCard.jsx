@@ -34,13 +34,13 @@ const UserIdentityCard = ({ firstName, setFirstName, lastName, setLastName }) =>
         <form
           onSubmit={e => {
             e.preventDefault();
-            alert('success');
+            alert('Login successful');
           }}
           className="flex flex-col gap-4"
         >
           <FullnameInput title={'Firstname'} placeholder={'Satoshi'} state={setFirstName} name={firstName} />
           <FullnameInput title={'Lastname'} placeholder={'Nakamoto'} state={setLastName} name={lastName} />
-          <button type="button" className="py-4 mt-16 font-bold text-black rounded-full bg-primary disabled:bg-blue-400/60 active:scale-95 hover:bg-primary/90" disabled={!isValidRule}>
+          <button type="submit" className="py-4 mt-16 font-bold text-black rounded-full bg-primary disabled:bg-blue-400/60 active:scale-95 hover:bg-primary/90" disabled={!isValidRule}>
             Continue
           </button>
         </form>

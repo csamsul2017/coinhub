@@ -1,32 +1,50 @@
 import { useState, useEffect } from 'react';
 import OtpInput from 'react-otp-input';
 import Spinner from './Spinner';
+import { resendEmailOtpService, verifyEmailOtpService } from '../../services/authService';
 
-const VerifyEmailCard = ({ email, onBack, onNext }) => {
+const VerifyEmailCard = ({ email, onBack, onNext, setEmailOtp, emailOtp }) => {
   const [otp, setOtp] = useState('');
   const [submit, setSubmit] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
   const [invalidCode, setInvalidCode] = useState(false);
+  const [isLoading, setIsLoading] = useState();
 
-  const handleVerify = () => {
-    setSubmit(!submit);
+  // const handleVerifyLoading = () => {
+  //   setSubmit(!submit);
 
-    setTimeout(() => {
+  //   setTimeout(() => {
+  //     setSubmit(false);
+
+  //     if (otp === '123456') {
+  //       onNext();
+  //     } else {
+  //       setInvalidCode(true);
+  //       setOtp('');
+  //     }
+  //   }, 2000);
+  // };
+
+  const handleVerify = async otp => {
+    try {
+      setSubmit(true);
+      const response = await verifyEmailOtpService(otp);
+      console.log(response);
+      onNext();
+    } catch (error) {
+      setInvalidCode(true);
+      setOtp('');
+      console.log(error.response.data);
+    } finally {
       setSubmit(false);
-
-      if (otp === '123456') {
-        onNext();
-      } else {
-        setInvalidCode(true);
-        setOtp('');
-      }
-    }, 2000);
+      setOtp('');
+    }
   };
 
   useEffect(() => {
     if (otp.length === 6) {
       // setSubmit(!submit);
-      handleVerify();
+      handleVerify(otp);
     }
   }, [otp]);
 
@@ -39,6 +57,16 @@ const VerifyEmailCard = ({ email, onBack, onNext }) => {
 
     return () => clearTimeout(id);
   }, [timeLeft]);
+
+  const handleResendOtp = async email => {
+    try {
+      await resendEmailOtpService('csamsul2021@gmail.com');
+    } catch (error) {
+      console.log(error.response);
+    } finally {
+      setTimeLeft(30);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center mt-16 text-white">
@@ -64,28 +92,7 @@ const VerifyEmailCard = ({ email, onBack, onNext }) => {
             )}
           </div>
 
-          {/* <div className="flex justify-between gap-2">
-            <div className="border rounded-lg w-13 h-14 border-muted">
-              <input type="text" className="w-full h-full p-2 bg-transparent rounded-lg" />
-            </div>
-            <div className="border rounded-lg w-13 h-14 border-muted">
-              <input type="text" className="w-full h-full bg-transparent rounded-lg" />
-            </div>
-            <div className="border rounded-lg w-13 h-14 border-muted">
-              <input type="text" className="w-full h-full bg-transparent rounded-lg" />
-            </div>
-            <div className="border rounded-lg w-13 h-14 border-muted">
-              <input type="text" className="w-full h-full bg-transparent rounded-lg" />
-            </div>
-            <div className="border rounded-lg w-13 h-14 border-muted">
-              <input type="text" className="w-full h-full bg-transparent rounded-lg" />
-            </div>
-            <div className="border rounded-lg w-13 h-14 border-muted">
-              <input type="text" className="w-full h-full bg-transparent rounded-lg" />
-            </div>
-          </div> */}
-
-          <div className="flex flex-col gap-2 min-h-20">
+          <div className="flex flex-col items-center justify-center gap-2 items min-h-20">
             <OtpInput
               value={otp}
               onChange={setOtp}
@@ -101,14 +108,21 @@ const VerifyEmailCard = ({ email, onBack, onNext }) => {
               )}
             />
 
-            {invalidCode && <p className="text-red-500">Invalid code.</p>}
+            {invalidCode && <p className="w-full text-red-500 ">Invalid code.</p>}
           </div>
 
           {/* <button className={`py-4 mt-8 font-bold rounded-full ${timeLeft ? 'bg-muted/20 text-white/50' : 'bg-muted/50 text-white'}`} disabled={timeLeft}>
             Resend code in {timeLeft}
           </button> */}
 
-          <button className={`py-4 mt-4 font-bold rounded-full bg-muted/50 text-white hover:bg-muted/70 disabled:bg-muted/20 active:scale-95 disabled:text-white/50`} onClick={() => setTimeLeft(30)} disabled={timeLeft}>
+          <button
+            className={`py-4 mt-4 font-bold rounded-full bg-muted/50 text-white hover:bg-muted/70 disabled:bg-muted/20 active:scale-95 disabled:text-white/50`}
+            onClick={async () => {
+              setTimeLeft(30);
+              await handleResendOtp(email);
+            }}
+            disabled={timeLeft}
+          >
             Resend code {timeLeft > 0 && `in ${timeLeft}`}
           </button>
           <button onClick={onBack} className="py-4 font-bold text-blue-400 rounded-full hover:bg-muted/20 active:scale-95">

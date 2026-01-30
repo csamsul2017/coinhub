@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { FaCheckCircle, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
-const CreatePasswordCard = ({ password, setPassword }) => {
+const CreatePasswordCard = ({ password, setPassword, onNext }) => {
   const [seePassword, setSeePassword] = useState(false);
   const hasLength = password.length >= 8;
   const hasMixedCase = /[a-z]/.test(password) && /[A-Z]/.test(password);
@@ -28,7 +28,7 @@ const CreatePasswordCard = ({ password, setPassword }) => {
         <form
           onSubmit={e => {
             e.preventDefault();
-            alert('Create password success');
+            onNext();
           }}
           className="relative flex flex-col gap-4"
         >

@@ -1,8 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { registerEmailService } from '../../services/authService';
 import { FaGoogle, FaApple } from 'react-icons/fa';
+import Spinner from './Spinner';
 
-const RegistrationCard = ({ onNext, setEmail }) => {
+const RegistrationCard = ({ onNext, setEmail, email }) => {
   const [validEmail, setValidEmail] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // useEffect(() => {
+  //   if (errorMessage) console.log('this error messag', errorMessage);
+  // }, [errorMessage]);
+
+  const handlerRegisterEmail = async email => {
+    try {
+      setErrorMessage('');
+      setIsLoading(true);
+      await registerEmailService(email);
+      onNext();
+    } catch (error) {
+      setErrorMessage(error.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center">
@@ -13,9 +34,10 @@ const RegistrationCard = ({ onNext, setEmail }) => {
         <form
           onSubmit={e => {
             e.preventDefault();
-            onNext();
+            handlerRegisterEmail(email);
+            // onNext();
           }}
-          className="flex flex-col gap-4 mt-4"
+          className="flex flex-col gap-2 mt-4"
         >
           <label>Email</label>
           <input
@@ -28,8 +50,11 @@ const RegistrationCard = ({ onNext, setEmail }) => {
             placeholder="Your email address"
             required
           />
-          <button type="submit" className={`text-[#0A0B0D] font-bold py-4 rounded-full ${validEmail ? 'bg-primary' : 'bg-blue-500/50'} `}>
-            Continue
+
+          <p className="h-8 text-xs">{errorMessage}</p>
+
+          <button type="submit" className={`text-[#0A0B0D] font-bold py-4 rounded-full flex justify-center ${validEmail ? 'bg-primary' : 'bg-blue-500/50'} `}>
+            {isLoading ? <Spinner textColor="text-black-500" /> : 'Continue'}
           </button>
         </form>
 

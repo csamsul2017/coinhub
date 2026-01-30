@@ -7,5 +7,12 @@ export default defineConfig({
   server: {
     host: true,
     allowedHosts: ['chr.samsuldev.my.id'],
+    proxy: {
+      '/api': {
+        target: 'https://anaf17-coinhub.hf.space',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });

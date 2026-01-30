@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 
-const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber }) => {
+const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber, onNext }) => {
   const safePhoneNumber = phoneNumber || '';
   const hasLength = safePhoneNumber.length >= 10 && safePhoneNumber.length <= 13;
 
@@ -16,7 +16,7 @@ const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber }) => {
         <form
           onSubmit={e => {
             e.preventDefault();
-            alert('Succes');
+            onNext();
           }}
           className="flex flex-col justify-between gap-2"
         >
