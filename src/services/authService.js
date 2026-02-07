@@ -18,4 +18,20 @@ const resendEmailOtpService = async email => {
   return response.data;
 };
 
-export { registerEmailService, verifyEmailOtpService, resendEmailOtpService };
+const registerService = async payload => {
+  const response = await axiosClient.post('/auth/register', payload);
+  return response;
+};
+
+const sigInService = async payload => {
+  const response = await axiosClient.post('/auth/login', payload);
+  return response;
+};
+
+const forgotPasswordService = async payload => {
+  console.log(payload);
+  const response = await axiosClient.post('/auth/forgot-password', payload);
+  return response;
+};
+
+export { registerEmailService, verifyEmailOtpService, resendEmailOtpService, registerService, sigInService, forgotPasswordService };

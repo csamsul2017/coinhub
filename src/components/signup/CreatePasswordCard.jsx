@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { FaCheckCircle, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import Spinner from './Spinner';
 
 const CreatePasswordCard = ({ password, setPassword, onNext }) => {
   const [seePassword, setSeePassword] = useState(false);

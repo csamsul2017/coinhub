@@ -6,24 +6,9 @@ import { resendEmailOtpService, verifyEmailOtpService } from '../../services/aut
 const VerifyEmailCard = ({ email, onBack, onNext, setEmailOtp, emailOtp }) => {
   const [otp, setOtp] = useState('');
   const [submit, setSubmit] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(29);
   const [invalidCode, setInvalidCode] = useState(false);
   const [isLoading, setIsLoading] = useState();
-
-  // const handleVerifyLoading = () => {
-  //   setSubmit(!submit);
-
-  //   setTimeout(() => {
-  //     setSubmit(false);
-
-  //     if (otp === '123456') {
-  //       onNext();
-  //     } else {
-  //       setInvalidCode(true);
-  //       setOtp('');
-  //     }
-  //   }, 2000);
-  // };
 
   const handleVerify = async otp => {
     try {
@@ -60,7 +45,7 @@ const VerifyEmailCard = ({ email, onBack, onNext, setEmailOtp, emailOtp }) => {
 
   const handleResendOtp = async email => {
     try {
-      await resendEmailOtpService('csamsul2021@gmail.com');
+      await resendEmailOtpService(email);
     } catch (error) {
       console.log(error.response);
     } finally {

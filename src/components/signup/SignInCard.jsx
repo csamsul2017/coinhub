@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaApple } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const SignInCard = ({ setEmail, onNext }) => {
   const [validEmail, setValidEmail] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-center flex-1 md:items-end">
@@ -51,7 +53,10 @@ const SignInCard = ({ setEmail, onNext }) => {
         </div>
 
         <p className="font-bold text-center">
-          Don't have an account? <span className="text-primary">Sign up</span>
+          Don't have an account?{' '}
+          <button className="text-primary" onClick={() => navigate('/signup')}>
+            Sign up
+          </button>
         </p>
 
         <p className="leading-none text-md text-muted">

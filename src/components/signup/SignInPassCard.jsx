@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FaUserCircle, FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
+import Spinner from './Spinner';
 
-const SignInPassCard = ({ email, password, setPassword }) => {
+const SignInPassCard = ({ email, password, setPassword, onNext, isLoading, forgotPass }) => {
   const [showPassword, setShowPassword] = useState(false);
-
   const validPassword = password.length > 1;
 
   return (
@@ -19,16 +19,22 @@ const SignInPassCard = ({ email, password, setPassword }) => {
           <form
             onSubmit={e => {
               e.preventDefault();
-              alert('You are login');
+              onNext();
             }}
             className="flex flex-col gap-2"
           >
             <p>Password</p>
-            <input type={showPassword ? 'text' : 'password'} onChange={e => setPassword(e.target.value)} className="w-full p-4 bg-transparent border rounded-lg border-muted" required />
+            <input type={showPassword ? 'text' : 'password'} onChange={e => setPassword(e.target.value)} className="w-full p-4 bg-transparent border rounded-lg border-muted disabled:text-muted" disabled={isLoading} required />
 
-            <p className="text-blue-500">Forgot password?</p>
-            <button type="submit" className={`w-full p-4 font-bold text-black rounded-full  ${validPassword ? 'bg-primary' : 'bg-blue-500/50'} `} disabled={!password}>
-              Continue
+            <button className="text-left text-blue-500" type="button" onClick={forgotPass}>
+              Forgot password?
+            </button>
+            <button
+              type="submit"
+              className={`w-full h-14 items-center p-4 font-bold text-black rounded-full flex justify-center  ${validPassword ? 'bg-primary' : 'bg-blue-500/50'} disabled:bg-blue-500/50 active:scale-95 hover:bg-primary/90`}
+              disabled={isLoading}
+            >
+              {isLoading ? <Spinner textColor="text-black" /> : 'Continue'}
             </button>
           </form>
 

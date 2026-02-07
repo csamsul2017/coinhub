@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { coinbaseLogo } from '../assets/home';
 import { FaSearch, FaBars, FaGlobeAmericas, FaTimes, FaChevronRight } from 'react-icons/fa';
 
+
 const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
   const navlinks = [
     { name: 'Cryptocurrencies', link: '#' },

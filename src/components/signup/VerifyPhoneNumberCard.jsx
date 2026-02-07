@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
+import Spinner from './Spinner';
+import { Link } from 'react-router-dom';
 
-const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber, onNext }) => {
+const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber, onNext, isLoading }) => {
   const safePhoneNumber = phoneNumber || '';
   const hasLength = safePhoneNumber.length >= 10 && safePhoneNumber.length <= 13;
 
@@ -22,7 +24,7 @@ const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber, onNext }) => {
         >
           <label>Phone number</label>
           <div className="flex gap-4">
-            <div className="flex items-center gap-4 px-12 py-4 border rounded-lg w-fit border-muted/50">ID +62</div>
+            <div className={`flex items-center gap-4 px-12 py-4 border rounded-lg w-fit border-muted/50 ${isLoading && 'text-muted'} `}>ID +62</div>
             <div className="flex-1">
               <input
                 type="text"
@@ -34,16 +36,21 @@ const VerifyPhoneNumberCard = ({ phoneNumber, setPhoneNumber, onNext }) => {
                   }
                 }}
                 inputMode="numeric"
-                className="w-full h-full px-4 bg-transparent border rounded-lg border-muted/50"
+                className="w-full h-full px-4 bg-transparent border rounded-lg border-muted/50 disabled:text-muted"
                 placeholder="0000-000-000"
                 value={phoneNumber}
+                disabled={isLoading}
                 required
               />
             </div>
           </div>
 
-          <button type="submit" className="w-full py-4 mt-4 font-bold text-black rounded-full bg-primary disabled:bg-blue-500/50 active:scale-95 hover:bg-primary/90" disabled={!hasLength}>
+          <Link to="/dasboard" className="">
             Continue
+          </Link>
+
+          <button type="submit" className="flex items-center justify-center w-full py-4 mt-8 font-bold text-black rounded-full h-14 bg-primary disabled:bg-blue-500/50 active:scale-95 hover:bg-primary/90" disabled={!hasLength}>
+            {isLoading ? <Spinner textColor="black" /> : 'Continue'}
           </button>
         </form>
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { registerService } from '../../services/authService';
 
 // Component Helper
 const FullnameInput = ({ title, placeholder, state, name }) => {

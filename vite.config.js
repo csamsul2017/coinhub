@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    allowedHosts: ['chr.samsuldev.my.id'],
+    allowedHosts: ['chr.samsuldev.my.id', 'ocean.samsuldev.my.id'],
     proxy: {
       '/api': {
         target: 'https://anaf17-coinhub.hf.space',
