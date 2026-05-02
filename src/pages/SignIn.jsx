@@ -20,10 +20,17 @@ const SignIn = () => {
     const payload = { emailOrUsername: email, password };
     try {
       const response = await sigInService(payload);
-      console.log(response);
-      navigate('/dashboard');
+      // if (!response.ok) {
+      //   const errorData = await response.json();
+      //   throw new Error(errorData.message);
+      // }
+      const accessToken = response.data.token;
+      const refreshToken = response.data.refreshToken;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('resfeshToken', refreshToken);
+      navigate('/profile');
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     } finally {
       setIsLoading(false);
     }
