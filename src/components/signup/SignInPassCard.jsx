@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaUserCircle, FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
 import Spinner from './Spinner';
 
-const SignInPassCard = ({ email, password, setPassword, onNext, isLoading, forgotPass }) => {
+const SignInPassCard = ({ email, password, setPassword, onNext, isLoading, forgotPass, errorMessage }) => {
   const [showPassword, setShowPassword] = useState(false);
   const validPassword = password.length > 1;
 
@@ -24,8 +24,8 @@ const SignInPassCard = ({ email, password, setPassword, onNext, isLoading, forgo
             className="flex flex-col gap-2"
           >
             <p>Password</p>
-            <input type={showPassword ? 'text' : 'password'} onChange={e => setPassword(e.target.value)} className="w-full p-4 bg-transparent border rounded-lg border-muted disabled:text-muted" disabled={isLoading} required />
-
+            <input type={showPassword ? 'text' : 'password'} onChange={e => setPassword(e.target.value)} className="w-full p-4 bg-transparent border rounded-lg border-muted disabled:text-muted" disabled={isLoading} required autoFocus />
+            <span className="text-sm text-red-600 h-7">{errorMessage}</span>
             <button className="text-left text-blue-500" type="button" onClick={forgotPass}>
               Forgot password?
             </button>

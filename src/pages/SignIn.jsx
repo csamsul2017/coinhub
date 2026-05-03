@@ -13,6 +13,7 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
 
   const handleSigIn = async () => {
@@ -20,17 +21,14 @@ const SignIn = () => {
     const payload = { emailOrUsername: email, password };
     try {
       const response = await sigInService(payload);
-      // if (!response.ok) {
-      //   const errorData = await response.json();
-      //   throw new Error(errorData.message);
-      // }
       const accessToken = response.data.token;
       const refreshToken = response.data.refreshToken;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('resfeshToken', refreshToken);
       navigate('/profile');
     } catch (error) {
-      console.log(error.response);
+      setErrorMessage(error.response?.data?.message);
+      // console.log(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +50,7 @@ const SignIn = () => {
     <div className="flex flex-col bg-[#0A0B0D] py-4 min-h-screen">
       <HeaderSignUp />
       {step === 1 && <SignInCard onNext={() => setStep(2)} setEmail={setEmail} />}
-      {step === 2 && <SignInPassCard email={email} password={password} setPassword={setPassword} onNext={handleSigIn} isLoading={isLoading} forgotPass={() => setStep(3)} />}
+      {step === 2 && <SignInPassCard email={email} password={password} setPassword={setPassword} onNext={handleSigIn} errorMessage={errorMessage} isLoading={isLoading} forgotPass={() => setStep(3)} />}
       {step === 3 && (
         <ForgetPassCard
           setEmail={setEmail}

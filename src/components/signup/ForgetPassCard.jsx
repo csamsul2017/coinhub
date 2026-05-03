@@ -21,6 +21,7 @@ const ForgetPassCard = ({ setEmail, onNext }) => {
           <label>Email</label>
           <input
             type="email"
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
             className="p-4 bg-transparent border rounded-md border-muted"
             onChange={e => {
               setValidRule(e.target.validity.valid);

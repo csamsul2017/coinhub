@@ -8,7 +8,7 @@ const SignInCard = ({ setEmail, onNext }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-center flex-1 md:items-end">
+    <div className="flex justify-center flex-1 md:items-end pt-14">
       <div className="flex flex-col gap-4 px-10 py-4 text-white h-fit md:border md:border-muted/50 md:rounded-3xl md:max-w-md md:py-8">
         <h1 className="text-2xl font-bold">Sign in to Coinhub</h1>
 
@@ -22,6 +22,7 @@ const SignInCard = ({ setEmail, onNext }) => {
           <label>Email</label>
           <input
             type="email"
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
             className="p-4 bg-transparent border border-muted/50 rounded-xl"
             onChange={e => {
               setEmail(e.target.value);
@@ -29,6 +30,7 @@ const SignInCard = ({ setEmail, onNext }) => {
             }}
             placeholder="Your email address"
             required
+            autoFocus
           />
           <button type="submit" className={`py-4 font-bold text-center text-black rounded-full ${validEmail ? 'bg-primary' : 'bg-blue-500/60'}`} disabled={!validEmail}>
             Continue
@@ -41,12 +43,12 @@ const SignInCard = ({ setEmail, onNext }) => {
           <div className="flex-1 mt-3 border-t border-muted"></div>
         </div>
 
-        <div className="flex flex-col gap-2 ">
-          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-white/20">
+        <div className="flex flex-col gap-2 text-muted">
+          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-white/20" disabled>
             <FaGoogle />
             <span>Sign in with Google</span>
           </button>
-          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-gray-50/20">
+          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-gray-50/20" disabled>
             <FaApple />
             <span>Sign in with Apple</span>
           </button>

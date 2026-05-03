@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { coinbaseLogo } from '../assets/home';
 import { FaSearch, FaBars, FaGlobeAmericas, FaTimes, FaChevronRight } from 'react-icons/fa';
 
-
 const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
   const navlinks = [
     { name: 'Cryptocurrencies', link: '#' },
@@ -43,13 +42,13 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
           </div>
 
           <div className="items-center hidden md:flex">
-            <Link to="/signin" className="px-8 py-2 font-bold bg-surface rounded-3xl whitespace-nowrap hover:bg-gray-200">
+            <Link to="/signin" className="px-8 py-2 font-bold bg-surface rounded-3xl whitespace-nowrap hover:bg-gray-200 active:scale-95">
               Sign in
             </Link>
           </div>
 
           <div className="flex items-center">
-            <Link to="/signup" className="px-8 py-2 font-bold text-white bg-primary rounded-3xl whitespace-nowrap hover:bg-primary/90">
+            <Link to="/signup" className="px-8 py-2 font-bold text-white bg-primary rounded-3xl whitespace-nowrap hover:bg-primary/90 active:scale-95">
               Sign up
             </Link>
           </div>

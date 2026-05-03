@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { registerEmailService } from '../../services/authService';
 import { FaGoogle, FaApple } from 'react-icons/fa';
 import Spinner from './Spinner';
+import { Link } from 'react-router-dom';
 
 const RegistrationCard = ({ onNext, setEmail, email }) => {
   const [validEmail, setValidEmail] = useState(false);
@@ -42,6 +43,7 @@ const RegistrationCard = ({ onNext, setEmail, email }) => {
           <label>Email</label>
           <input
             type="email"
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
             className="px-4 py-4 bg-transparent border rounded-lg border-solid-muted ocus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             onChange={e => {
               setEmail(e.target.value);
@@ -49,6 +51,7 @@ const RegistrationCard = ({ onNext, setEmail, email }) => {
             }}
             placeholder="Your email address"
             required
+            autoFocus
           />
 
           <p className="h-8 text-xs">{errorMessage}</p>
@@ -64,19 +67,22 @@ const RegistrationCard = ({ onNext, setEmail, email }) => {
           <div className="flex-1 mt-3 border-t border-muted"></div>
         </div>
 
-        <div className="flex flex-col gap-2 ">
-          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-white/20">
+        <div className="flex flex-col gap-2 text-muted">
+          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-white/20 " disabled>
             <FaGoogle />
             <span>Sign up with Google</span>
           </button>
-          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-gray-50/20">
+          <button className="flex items-center justify-center gap-4 py-4 rounded-full bg-gray-50/20" disabled>
             <FaApple />
             <span>Sign up with Apple</span>
           </button>
         </div>
 
         <p className="my-4 font-bold text-center">
-          Already have an account? <span className="text-primary">Sign in</span>
+          Already have an account?{' '}
+          <Link to={'/signin'} className="text-primary active:scale-95">
+            Sign in
+          </Link>
         </p>
 
         <div className="flex flex-col gap-4 text-sm tracking-tighter text-muted">
